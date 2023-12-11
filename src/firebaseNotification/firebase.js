@@ -2,13 +2,13 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 const firebaseConfig = {
-  apiKey: "AIzaSyB30QqSskLcuHYuGNvzEuWnowhAQCpX6b4",
-  authDomain: "test-push-notification-2d2bb.firebaseapp.com",
-  projectId: "test-push-notification-2d2bb",
-  storageBucket: "test-push-notification-2d2bb.appspot.com",
-  messagingSenderId: "507544935388",
-  appId: "1:507544935388:web:e188cfb3c48bc905d5cd19",
-  measurementId: "G-8Y0PM6KF6Z"
+  apiKey: "AIzaSyDUwaV6tyxtFjOSWbHqgMDkkLP4mfzHi5A",
+  authDomain: "test-web-notification-7c0e2.firebaseapp.com",
+  projectId: "test-web-notification-7c0e2",
+  storageBucket: "test-web-notification-7c0e2.appspot.com",
+  messagingSenderId: "496516845654",
+  appId: "1:496516845654:web:bc5127331cce2679206bf7",
+  measurementId: "G-XPR5VW2HRL"
 };
 
 
@@ -18,17 +18,19 @@ const firebaseConfig = {
   const app = initializeApp(firebaseConfig);
   const messaging = getMessaging(app);
   
-  export const requestPermission = () => {
+  export const requestPermission = (onTokenReceived) => {
     console.log("Requesting User Permission......");
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
         console.log("Notification User Permission Granted.");
-        return getToken(messaging, {
-          vapidKey: 'BPtGH9V69dJ68kQEoSreyuPEFOQ0nujub4YyBO1PhXUA405I-cefvDVG7DwrXFcUhf6ZQKQ9xnXYNefhLBc4f0o'
+        getToken(messaging, {
+          vapidKey: 'BAC-tQf5jPu475hhw9eHD4J0lZvzuqxQVaoymCvwtDV2gl6e050-WoUf197ur8_kGssUwnnbd13oKIypQ1jy9LU'
         })
           .then((currentToken) => {
             if (currentToken) {
               console.log("Client Token: ", currentToken);
+              // Pass the token to the parent or another function
+              onTokenReceived(currentToken);
             } else {
               console.log("Failed to generate the app registration token.");
             }
@@ -45,7 +47,7 @@ const firebaseConfig = {
     });
   };
   
-  requestPermission();
+  // requestPermission();
   
   export const onMessageListener = () =>
     new Promise((resolve) => {

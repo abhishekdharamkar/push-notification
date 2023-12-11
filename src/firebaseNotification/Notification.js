@@ -5,7 +5,7 @@ import { onMessageListener, requestPermission } from './firebase';
 const Notification = (props) => {
     const [notification, setNotification] = useState({ title: '', body: '' });
     useEffect(() => {
-        requestPermission();
+        // requestPermission();
         onMessageListener();
         const unsubscribe = onMessageListener().then((payload) => {
             setNotification({
@@ -13,7 +13,7 @@ const Notification = (props) => {
                 body: payload?.notification?.body,
             });
             toast.success(`${payload?.notification?.title}: ${payload?.notification?.body}`, {
-                duration: 3000,
+                duration:5000,
                 position: 'top-right',
             });
         });
