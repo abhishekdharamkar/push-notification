@@ -15,5 +15,5 @@
         };
 
 ### Flow
-    Setup project --> Run Project --> Allowed Notification Permission --> Recieve notification 
+    Setup project --> Run Project --> Allowed Notification Permission --> Api Call --> Backend --> firebase --> frontend (Notification) 
     
